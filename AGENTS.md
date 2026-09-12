@@ -126,6 +126,7 @@ marqués "(à confirmer)" — à valider avec l'utilisateur avant publication.
 - **Prisma 7+** exige des driver adapters (config différente). Ce projet utilise
   **Prisma 6.19** (dernière version avec le workflow classique `url` dans le
   schema + `migrate dev`). Ne pas upgrader vers Prisma 7/8 sans migrer la config.
-- **Pattern Supabase** : `DATABASE_URL` (pooled, port 6543, PgBouncer) pour le
-  runtime + `DIRECT_URL` (directe, port 5432) pour les migrations. Le bloc
-  `datasource` du schema déclare `directUrl = env("DIRECT_URL")`.
+- **Pattern Supabase** : `DATABASE_URL` et `DIRECT_URL` pointent toutes deux
+  vers le port 5432 (connexion directe). Le pooler PgBouncer (port 6543) n'est
+  pas accessible depuis le runtime serverless Vercel — il provoque des erreurs
+  `Can't reach database server`. Le port 5432 fonctionne en local et en prod.
