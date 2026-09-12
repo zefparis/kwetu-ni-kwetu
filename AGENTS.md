@@ -126,7 +126,9 @@ marqués "(à confirmer)" — à valider avec l'utilisateur avant publication.
 - **Prisma 7+** exige des driver adapters (config différente). Ce projet utilise
   **Prisma 6.19** (dernière version avec le workflow classique `url` dans le
   schema + `migrate dev`). Ne pas upgrader vers Prisma 7/8 sans migrer la config.
-- **Pattern Supabase** : `DATABASE_URL` et `DIRECT_URL` pointent toutes deux
-  vers le port 5432 (connexion directe). Le pooler PgBouncer (port 6543) n'est
-  pas accessible depuis le runtime serverless Vercel — il provoque des erreurs
-  `Can't reach database server`. Le port 5432 fonctionne en local et en prod.
+- **Pattern Supabase** : `DATABASE_URL` et `DIRECT_URL` pointent vers le
+  **Session Pooler Supavisor** (`aws-0-eu-central-1.pooler.supabase.com:5432`),
+  qui a une IPv4 (accessible depuis Vercel serverless). Le host direct
+  `db.seuocrfvclnfavtycbyk.supabase.co` n'a que de l'IPv6 depuis janv. 2024 —
+  inaccessible depuis Vercel. Le user du pooler est `postgres.seuocrfvclnfavtycbyk`
+  (format `postgres.[project-ref]`), pas `postgres`.
