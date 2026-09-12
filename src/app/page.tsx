@@ -5,23 +5,30 @@ export const metadata = { title: "Accueil" };
 export default function HomePage() {
   return (
     <>
-      <section>
-        <div className="wrap hero">
-          <div>
-            <p className="eyebrow">Fondation de droit congolais — Kinshasa, RDC</p>
-            <h1>Le développement durable commence par la communauté.</h1>
-            <p className="lede">
-              La Fondation Kwetu Ni Kwetu accompagne les villages et les zones
-              rurales de la République démocratique du Congo vers l'autonomie —
-              par la solidarité, la dignité humaine et la valorisation des
-              ressources locales.
-            </p>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-              <Link className="btn" href="/domaines">Nos domaines d'intervention</Link>
-              <Link className="btn ghost" href="/campagnes">Soutenir une campagne</Link>
-            </div>
+      {/* ---------- Hero ---------- */}
+      <section className="home-hero">
+        <div className="wrap home-hero-inner">
+          <p className="eyebrow">Fondation de droit congolais — Kinshasa, RDC</p>
+          <h1 className="home-hero-title">
+            Le développement durable commence par la communauté.
+          </h1>
+          <p className="home-hero-lede">
+            La Fondation Kwetu Ni Kwetu accompagne les villages et les zones
+            rurales de la République démocratique du Congo vers l'autonomie —
+            par la solidarité, la dignité humaine et la valorisation des
+            ressources locales.
+          </p>
+          <div className="home-hero-cta">
+            <Link className="btn" href="/domaines">Nos domaines d'intervention</Link>
+            <Link className="btn ghost" href="/campagnes">Soutenir une campagne</Link>
           </div>
-          <svg className="hero-art" viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg
+            className="home-hero-art"
+            viewBox="0 0 420 380"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
             <circle cx="330" cy="70" r="42" fill="#C4842A" opacity="0.9" />
             <path d="M0 260C50 190 110 160 175 160C240 160 300 190 350 260" stroke="#5C6B2F" strokeWidth="3" fill="none" />
             <path d="M0 300C60 230 130 200 200 200C270 200 330 230 400 300" stroke="#A64B2E" strokeWidth="3" fill="none" />
@@ -33,8 +40,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="wrap"><hr className="divider" /></div>
-
+      {/* ---------- Quote ---------- */}
       <section className="quote-strip section-tight">
         <div className="wrap" style={{ textAlign: "center" }}>
           <blockquote>
@@ -44,17 +50,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
-        <div className="wrap two-col">
-          <div>
-            <p className="eyebrow">Notre devise</p>
-            <h2>Trois valeurs, une même direction.</h2>
-            <p>
-              Chacune guide une part de notre action sur le terrain, du soutien
-              aux familles vulnérables jusqu'à l'entrepreneuriat communautaire.
-            </p>
-          </div>
-          <div></div>
+      {/* ---------- Valeurs ---------- */}
+      <section className="home-section">
+        <div className="wrap">
+          <p className="eyebrow">Notre devise</p>
+          <h2 className="home-section-title">Trois valeurs, une même direction.</h2>
+          <p className="home-section-lede">
+            Chacune guide une part de notre action sur le terrain, du soutien
+            aux familles vulnérables jusqu'à l'entrepreneuriat communautaire.
+          </p>
         </div>
         <div className="wrap" style={{ marginTop: 30 }}>
           <div className="valeurs-grid">
@@ -77,17 +81,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
+      {/* ---------- Sur le terrain ---------- */}
+      <section className="home-section">
         <div className="wrap">
           <p className="eyebrow">Sur le terrain</p>
-          <h2 style={{ maxWidth: "20ch" }}>Une approche intégrée du village jusqu'à la commercialisation.</h2>
-          <p style={{ maxWidth: "60ch" }}>
+          <h2 className="home-section-title">
+            Une approche intégrée du village jusqu'à la commercialisation.
+          </h2>
+          <p className="home-section-lede">
             Développement rural, agriculture et élevage, éducation, santé,
             autonomisation des femmes et des jeunes : nous répondons aux besoins
             essentiels des populations tout en posant les bases d'un
             développement durable.
           </p>
-          <div style={{ marginTop: 26, display: "flex", gap: 14, flexWrap: "wrap" }}>
+          <div className="home-section-cta">
             <Link className="btn ghost" href="/domaines">Voir tous les domaines →</Link>
             <Link className="btn fraternite" href="/campagnes">Découvrir les campagnes →</Link>
           </div>
