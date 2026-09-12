@@ -3,6 +3,7 @@ import { getActiveCampaigns, getFilterOptions, fundedQty, progressPercent } from
 import CampaignCard from "@/components/CampaignCard";
 
 export const metadata = { title: "Campagnes" };
+export const dynamic = "force-dynamic";
 
 export default async function CampagnesPage({
   searchParams,

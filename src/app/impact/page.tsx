@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getDeliveredCampaigns, fundedQty } from "@/lib/data";
 
 export const metadata = { title: "Impact" };
+export const dynamic = "force-dynamic";
 
 export default async function ImpactPage() {
   const delivered = await getDeliveredCampaigns();

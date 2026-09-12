@@ -6,6 +6,7 @@ import CreateCampaignForm from "./CreateCampaignForm";
 import CampaignActions from "./CampaignActions";
 
 export const metadata = { title: "Administration" };
+export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
   if (!(await isAuthenticated())) {
