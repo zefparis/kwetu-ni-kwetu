@@ -5,7 +5,7 @@ export const metadata = { title: "Accueil" };
 export default function HomePage() {
   return (
     <>
-      <section className="hero">
+      <section>
         <div className="wrap hero">
           <div>
             <p className="eyebrow">Fondation de droit congolais — Kinshasa, RDC</p>

@@ -54,7 +54,7 @@ h3{ font-size:1.15rem; font-weight:600; }
 p{ margin:0 0 1em; max-width:62ch; color:var(--ink-soft); overflow-wrap:break-word; }
 .lede{ font-size:1.15rem; color:var(--ink); max-width:52ch; overflow-wrap:break-word; }
 
-.wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+.wrap{ max-width:1080px; margin:0 auto; padding:0 28px; min-width:0; }
 @media (max-width:520px){ .wrap{ padding:0 18px; } }
 
 /* ---------- header / nav ---------- */
@@ -202,6 +202,7 @@ section{ padding:86px 0; }
   align-items:center; padding:70px 0 90px;
   overflow:hidden;
 }
+.hero > *{ min-width:0; }
 .hero p.lede{ margin-bottom:1.6em; }
 .hero-art{ width:100%; }
 @media (max-width:860px){
