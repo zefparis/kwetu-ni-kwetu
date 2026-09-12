@@ -66,15 +66,15 @@ export default function ContactPage() {
           >
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <label htmlFor="nom" style={{ fontSize: ".85rem", color: "var(--ink-soft)" }}>Nom complet</label>
-              <input id="nom" name="nom" type="text" required style={{ padding: 12, border: "1px solid var(--line)", borderRadius: 3, background: "var(--panel)", fontFamily: "var(--sans)", fontSize: "1rem" }} />
+              <input id="nom" name="nom" type="text" required style={{ padding: 12, border: "1px solid var(--line)", borderRadius: 3, background: "var(--panel)", fontFamily: "var(--sans)", fontSize: "16px" }} />
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <label htmlFor="email" style={{ fontSize: ".85rem", color: "var(--ink-soft)" }}>Adresse e-mail</label>
-              <input id="email" name="email" type="email" required style={{ padding: 12, border: "1px solid var(--line)", borderRadius: 3, background: "var(--panel)", fontFamily: "var(--sans)", fontSize: "1rem" }} />
+              <input id="email" name="email" type="email" required style={{ padding: 12, border: "1px solid var(--line)", borderRadius: 3, background: "var(--panel)", fontFamily: "var(--sans)", fontSize: "16px" }} />
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               <label htmlFor="message" style={{ fontSize: ".85rem", color: "var(--ink-soft)" }}>Message</label>
-              <textarea id="message" name="message" rows={5} required style={{ padding: 12, border: "1px solid var(--line)", borderRadius: 3, background: "var(--panel)", fontFamily: "var(--sans)", fontSize: "1rem", resize: "vertical" }} />
+              <textarea id="message" name="message" rows={5} required style={{ padding: 12, border: "1px solid var(--line)", borderRadius: 3, background: "var(--panel)", fontFamily: "var(--sans)", fontSize: "16px", resize: "vertical" }} />
             </div>
             <button type="submit" className="btn" style={{ justifyContent: "center", border: "1px solid var(--amour)", cursor: "pointer" }}>
               Envoyer le message

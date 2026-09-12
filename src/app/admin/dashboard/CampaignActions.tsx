@@ -28,8 +28,7 @@ export default function CampaignActions({
     <div className="actions">
       {status !== "completed" && status !== "delivered" && (
         <button
-          className="btn ghost"
-          style={{ padding: "6px 14px", fontSize: ".82rem" }}
+          className="btn ghost admin-action-btn"
           disabled={loading}
           onClick={() => update("completed")}
         >
@@ -38,8 +37,7 @@ export default function CampaignActions({
       )}
       {status !== "delivered" && (
         <button
-          className="btn fraternite"
-          style={{ padding: "6px 14px", fontSize: ".82rem" }}
+          className="btn fraternite admin-action-btn"
           disabled={loading}
           onClick={() => update("delivered")}
         >
@@ -48,8 +46,7 @@ export default function CampaignActions({
       )}
       {status === "delivered" && (
         <button
-          className="btn ghost"
-          style={{ padding: "6px 14px", fontSize: ".82rem" }}
+          className="btn ghost admin-action-btn"
           disabled={loading}
           onClick={() => update("active")}
         >

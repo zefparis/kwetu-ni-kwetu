@@ -27,11 +27,11 @@ export default async function AdminDashboardPage() {
         <span>
           <strong>Espace administration</strong> — Fondation Kwetu Ni Kwetu
         </span>
-        <form action="/api/admin/logout" method="POST">
-          <button type="submit" className="btn ghost" style={{ padding: "6px 16px", fontSize: ".82rem" }}>
-            Déconnexion
-          </button>
-        </form>
+          <form action="/api/admin/logout" method="POST">
+            <button type="submit" className="btn ghost admin-action-btn">
+              Déconnexion
+            </button>
+          </form>
       </div>
 
       <section className="section-tight">
@@ -80,18 +80,18 @@ export default async function AdminDashboardPage() {
                   const pct = c.targetQty > 0 ? Math.min(100, Math.round((funded / c.targetQty) * 100)) : 0;
                   return (
                     <tr key={c.id}>
-                      <td>
+                      <td data-label="Titre">
                         <Link href={`/campagnes/${c.id}`} style={{ fontWeight: 500 }}>
                           {c.title}
                         </Link>
                       </td>
-                      <td>{c.productType}</td>
-                      <td>{c.village}</td>
-                      <td>{funded}/{c.targetQty} ({pct}%)</td>
-                      <td>
+                      <td data-label="Produit">{c.productType}</td>
+                      <td data-label="Village">{c.village}</td>
+                      <td data-label="Progression">{funded}/{c.targetQty} ({pct}%)</td>
+                      <td data-label="Statut">
                         <span className={`pill ${c.status}`}>{statusLabel[c.status] ?? c.status}</span>
                       </td>
-                      <td>
+                      <td data-label="Actions">
                         <CampaignActions id={c.id} status={c.status} />
                       </td>
                     </tr>

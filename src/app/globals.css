@@ -53,6 +53,7 @@ p{ margin:0 0 1em; max-width:62ch; color:var(--ink-soft); }
 .lede{ font-size:1.15rem; color:var(--ink); max-width:52ch; }
 
 .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+@media (max-width:520px){ .wrap{ padding:0 18px; } }
 
 /* ---------- header / nav ---------- */
 header.site{
@@ -66,6 +67,7 @@ header.site{
   padding:18px 28px;
   max-width:1080px; margin:0 auto;
 }
+@media (max-width:520px){ .nav-row{ padding:14px 18px; } }
 .brand{
   display:flex; align-items:center; gap:10px;
   text-decoration:none; color:var(--ink);
@@ -87,7 +89,9 @@ nav.links a:hover, nav.links a[aria-current="page"]{
 
 .menu-btn{
   display:none; background:none; border:1px solid var(--line);
-  border-radius:6px; padding:8px 10px; cursor:pointer;
+  border-radius:6px; padding:10px 12px; cursor:pointer;
+  min-width:44px; min-height:44px;
+  display:none; align-items:center; justify-content:center;
 }
 .menu-btn span, .menu-btn span::before, .menu-btn span::after{
   display:block; width:18px; height:2px; background:var(--ink); position:relative; content:'';
@@ -103,8 +107,8 @@ nav.links a:hover, nav.links a[aria-current="page"]{
     display:none;
   }
   nav.links.open{ display:flex; }
-  nav.links a{ padding:12px 0; border-bottom:1px solid var(--line); }
-  .menu-btn{ display:block; }
+  nav.links a{ padding:14px 0; border-bottom:1px solid var(--line); }
+  .menu-btn{ display:flex; }
 }
 
 /* ---------- footer ---------- */
@@ -290,7 +294,7 @@ section{ padding:86px 0; }
 .filters label{ font-size:.8rem; color:var(--ink-soft); }
 .filters select, .filters input{
   padding:10px 12px; border:1px solid var(--line); border-radius:4px;
-  background:var(--panel); font-family:var(--sans); font-size:.92rem; color:var(--ink);
+  background:var(--panel); font-family:var(--sans); font-size:16px; color:var(--ink);
 }
 
 /* Détail campagne */
@@ -299,6 +303,9 @@ section{ padding:86px 0; }
 .campaign-detail .summary-card{
   background:var(--panel); border:1px solid var(--line); border-radius:6px;
   padding:28px; position:sticky; top:90px;
+}
+@media (max-width:860px){
+  .campaign-detail .summary-card{ position:static; padding:22px 20px; }
 }
 .summary-card .stat{ margin-bottom:18px; }
 .summary-card .stat strong{ font-family:var(--serif); font-size:1.6rem; display:block; }
@@ -312,17 +319,26 @@ section{ padding:86px 0; }
 .contrib-item .who{ color:var(--ink); font-weight:500; }
 .contrib-item .amt{ color:var(--fraternite); font-weight:600; }
 
-/* Formulaire contribuer (mock) */
+/* Formulaire contribuer */
 .contrib-form{ display:flex; flex-direction:column; gap:14px; margin-top:20px; }
 .contrib-form label{ font-size:.85rem; color:var(--ink-soft); }
-.contrib-form input{
+.contrib-form input, .contrib-form select{
   padding:12px; border:1px solid var(--line); border-radius:3px;
-  background:var(--panel); font-family:var(--sans); font-size:1rem;
+  background:var(--panel); font-family:var(--sans); font-size:16px;
+  color:var(--ink); width:100%; -webkit-appearance:none; appearance:none;
+}
+.contrib-form select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%235B4E37' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 14px center;
+  padding-right:36px;
 }
 .contrib-notice{
   background:var(--bg-deep); border:1px solid var(--line); border-radius:4px;
   padding:14px 16px; font-size:.88rem; color:var(--ink-soft); margin-top:8px;
 }
+
+/* Bouton contribution — pleine largeur + zone tactile suffisante sur mobile */
+.contrib-form .btn{ min-height:48px; justify-content:center; }
 
 /* Impact / preuves de livraison */
 .impact-grid{
@@ -354,15 +370,16 @@ section{ padding:86px 0; }
 .admin-form{ display:flex; flex-direction:column; gap:14px; margin-top:20px; }
 .admin-form input{
   padding:12px; border:1px solid var(--line); border-radius:3px;
-  background:var(--bg); font-family:var(--sans); font-size:1rem;
+  background:var(--bg); font-family:var(--sans); font-size:16px;
 }
 .admin-error{ color:var(--amour); font-size:.88rem; margin:0; }
 
 .admin-bar{
   background:var(--bg-deep); border-bottom:1px solid var(--line);
   padding:14px 28px; display:flex; justify-content:space-between; align-items:center;
-  font-size:.88rem;
+  gap:12px; flex-wrap:wrap; font-size:.88rem;
 }
+@media (max-width:520px){ .admin-bar{ padding:12px 18px; font-size:.82rem; } }
 .admin-table{ width:100%; border-collapse:collapse; margin-top:24px; }
 .admin-table th, .admin-table td{
   text-align:left; padding:12px 14px; border-bottom:1px solid var(--line);
@@ -377,12 +394,36 @@ section{ padding:86px 0; }
 .pill.completed{ background:rgba(92,107,47,.18); color:var(--fraternite); }
 .pill.delivered{ background:rgba(92,107,47,.28); color:var(--fraternite); }
 
+.admin-action-btn{ padding:8px 16px; font-size:.82rem; }
+@media (max-width:760px){ .admin-action-btn{ padding:10px 18px; font-size:.85rem; min-height:44px; } }
+
+/* Table admin → cards sur mobile */
+@media (max-width:760px){
+  .admin-table thead{ display:none; }
+  .admin-table, .admin-table tbody, .admin-table tr, .admin-table td{ display:block; width:100%; }
+  .admin-table tr{
+    background:var(--panel); border:1px solid var(--line); border-radius:6px;
+    padding:16px; margin-bottom:16px;
+  }
+  .admin-table td{
+    padding:8px 0; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; gap:12px; align-items:center;
+  }
+  .admin-table td:last-child{ border-bottom:none; }
+  .admin-table td::before{
+    content:attr(data-label); font-family:var(--serif); font-weight:600;
+    color:var(--ink); font-size:.82rem; flex:none;
+  }
+  .admin-table td[data-label="Titre"]{ font-weight:500; }
+  .admin-table .actions{ justify-content:flex-end; }
+}
+
 .form-stack{ display:flex; flex-direction:column; gap:16px; max-width:560px; }
 .form-stack .row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .form-stack label{ font-size:.85rem; color:var(--ink-soft); }
 .form-stack input, .form-stack textarea, .form-stack select{
   padding:12px; border:1px solid var(--line); border-radius:3px;
-  background:var(--panel); font-family:var(--sans); font-size:1rem; color:var(--ink);
+  background:var(--panel); font-family:var(--sans); font-size:16px; color:var(--ink);
 }
 .form-stack textarea{ resize:vertical; }
 @media (max-width:600px){ .form-stack .row{ grid-template-columns:1fr; } }
