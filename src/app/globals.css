@@ -33,6 +33,7 @@ body{
   font-size:17px;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 
 a{ color:inherit; }
@@ -44,13 +45,14 @@ h1,h2,h3{
   line-height:1.08;
   margin:0 0 .4em;
   color:var(--ink);
+  overflow-wrap:break-word;
 }
-h1{ font-size:clamp(2.4rem,5vw,3.6rem); font-weight:500; letter-spacing:-.01em; }
-h2{ font-size:clamp(1.7rem,3.2vw,2.3rem); }
+h1{ font-size:clamp(1.75rem,5vw,3.6rem); font-weight:500; letter-spacing:-.01em; }
+h2{ font-size:clamp(1.4rem,3.2vw,2.3rem); }
 h3{ font-size:1.15rem; font-weight:600; }
 
-p{ margin:0 0 1em; max-width:62ch; color:var(--ink-soft); }
-.lede{ font-size:1.15rem; color:var(--ink); max-width:52ch; }
+p{ margin:0 0 1em; max-width:62ch; color:var(--ink-soft); overflow-wrap:break-word; }
+.lede{ font-size:1.15rem; color:var(--ink); max-width:52ch; overflow-wrap:break-word; }
 
 .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
 @media (max-width:520px){ .wrap{ padding:0 18px; } }
@@ -142,6 +144,7 @@ section{ padding:86px 0; }
 .eyebrow{
   font-family:var(--serif); font-style:italic; font-size:1.02rem;
   color:var(--amour); margin:0 0 .3em; font-weight:500;
+  overflow-wrap:break-word;
 }
 
 /* ---------- devise / valeurs blocks ---------- */
@@ -197,11 +200,12 @@ section{ padding:86px 0; }
 .hero{
   display:grid; grid-template-columns:1.15fr .85fr; gap:56px;
   align-items:center; padding:70px 0 90px;
+  overflow:hidden;
 }
 .hero p.lede{ margin-bottom:1.6em; }
 .hero-art{ width:100%; }
 @media (max-width:860px){
-  .hero{ grid-template-columns:1fr; padding-top:40px; }
+  .hero{ grid-template-columns:1fr; padding-top:40px; gap:32px; }
   .hero-art{ max-width:340px; margin:0 auto; }
 }
 
