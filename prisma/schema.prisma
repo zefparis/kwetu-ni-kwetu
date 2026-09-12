@@ -32,17 +32,21 @@ model Campaign {
 }
 
 model Contribution {
-  id          String   @id @default(cuid())
-  campaignId  String
-  amount      Float
-  currency    String   @default("USD")
-  donorName   String?
-  donorEmail  String?
-  status      String   @default("pending") // pending | completed | failed
-  createdAt   DateTime @default(now())
+  id            String   @id @default(cuid())
+  campaignId    String
+  amount        Float
+  currency      String   @default("USD")
+  donorName     String?
+  donorEmail    String?
+  status        String   @default("pending") // pending | completed | failed
+  transactionId String?  // ID de transaction UniPay (pour le webhook)
+  operator      String?  // orange | airtel | afrimoney
+  phone         String?  // numéro Mobile Money du contributeur
+  createdAt     DateTime @default(now())
 
   campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
   @@index([campaignId])
   @@index([status])
+  @@index([transactionId])
 }

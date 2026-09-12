@@ -68,11 +68,53 @@ npm run dev
   (active → completed → delivered). Les campagnes `delivered` apparaissent
   sur `/impact`.
 
-## État — paiement NON branché (intentionnel)
+## Paiement UniPay — Mobile Money (branché)
 
-Le formulaire "Contribuer" est un **mock** : il affiche le total et un message
-"Paiement via UniPay à venir", mais ne déclenche aucune transaction et ne crée
-pas de contribution. L'intégration UniPay sera une étape séparée.
+Le formulaire "Contribuer" initie un vrai paiement Mobile Money via l'API
+UniPay (unipaycongo.com). Le flow :
+
+1. L'utilisateur remplit le formulaire (quantité, devise CDF/USD, opérateur
+   orange/airtel/afrimoney, numéro téléphone, nom/email optionnels)
+2. `POST /api/contributions` valide côté serveur, crée une Contribution
+   `pending`, appelle `POST /v1/payment/initiate` chez UniPay (direction:
+   collect), stocke le `transactionId`
+3. L'utilisateur reçoit un prompt USSD sur son téléphone pour confirmer
+4. UniPay envoie un webhook `payment.status_update` à
+   `/api/webhooks/unipay` (signature HMAC-SHA256 vérifiée)
+5. La contribution passe à `completed` ou `failed`. Si `completed` et la
+   campagne atteint son objectif → `campaign.status = "completed"`
+6. L'utilisateur est redirigé vers `/contribuer/[id]/statut` pour suivre
+   le statut de sa contribution
+
+### Sécurité
+
+- Le montant est **toujours recalculé côté serveur** (quantity × prix unitaire
+  de la campagne en base), jamais depuis la valeur envoyée par le client
+- Le webhook vérifie la signature HMAC-SHA256 (`X-UniPay-Signature: sha256=<hex>`)
+  avec `crypto.timingSafeEqual` — un webhook non signé est rejeté (401)
+- Les numéros de téléphone sont validés (format +243 + 9 chiffres)
+
+### Mode sandbox
+
+`UNIPAY_MODE=sandbox` ajoute le header `x-unipay-mode: sandbox` aux requêtes
+API. En sandbox, UniPay retourne immédiatement `status: "success"` sans
+prompt USSD réel. Passer à `UNIPAY_MODE=live` pour la production.
+
+### Variables d'environnement UniPay (.env — non commité)
+
+- `UNIPAY_API_URL` — URL de base de l'API (https://api.unipaycongo.com)
+- `UNIPAY_API_KEY` — clé API marchand (header X-API-Key)
+- `UNIPAY_WEBHOOK_SECRET` — secret HMAC pour vérifier les webhooks
+- `UNIPAY_MODE` — "sandbox" ou "live"
+
+### Fichiers UniPay
+
+- `src/lib/unipay.ts` — client API (initiatePayment, verifyWebhookSignature,
+  getTransactionStatus)
+- `src/app/api/contributions/route.ts` — création contribution + init paiement
+- `src/app/api/webhooks/unipay/route.ts` — webhook de confirmation
+- `src/components/ContributeForm.tsx` — formulaire (devise, opérateur, téléphone)
+- `src/app/contribuer/[id]/statut/page.tsx` — page de statut post-paiement
 
 ## Coordonnées provisoires
 

@@ -79,6 +79,7 @@ export default async function CampaignDetailPage({
           </div>
 
           <ContributeForm
+            campaignId={campaign.id}
             unitPrice={campaign.unitPrice}
             currency={campaign.currency}
             targetQty={campaign.targetQty}
