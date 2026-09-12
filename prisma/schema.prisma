@@ -1,0 +1,47 @@
+// Prisma schema — Fondation Kwetu Ni Kwetu (campagnes de financement)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Campaign {
+  id          String         @id @default(cuid())
+  title       String
+  description String
+  productType String
+  unitPrice   Float
+  currency    String         @default("USD")
+  targetQty   Int
+  village     String
+  status      String         @default("active") // active | completed | delivered
+  illustration String?
+  proofPhoto  String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  contributions Contribution[]
+
+  @@index([status])
+  @@index([village])
+  @@index([productType])
+}
+
+model Contribution {
+  id          String   @id @default(cuid())
+  campaignId  String
+  amount      Float
+  currency    String   @default("USD")
+  donorName   String?
+  donorEmail  String?
+  status      String   @default("pending") // pending | completed | failed
+  createdAt   DateTime @default(now())
+
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([status])
+}
