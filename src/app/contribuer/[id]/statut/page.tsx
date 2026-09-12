@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import RefreshButton from "./RefreshButton";
 
 export const dynamic = "force-dynamic";
 
@@ -116,12 +117,7 @@ export default async function ContributionStatusPage({
               ← Retour à la campagne
             </Link>
             {isPending && (
-              <button
-                className="btn"
-                onClick={() => window.location.reload()}
-              >
-                Actualiser le statut
-              </button>
+              <RefreshButton />
             )}
             {contribution.status === "failed" && (
               <Link className="btn" href={`/campagnes/${contribution.campaignId}`}>
