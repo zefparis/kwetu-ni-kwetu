@@ -1,12 +1,12 @@
 # Fondation Kwetu Ni Kwetu — Plateforme campagnes
 
 Site vitrine + système de campagnes de financement de produits de première
-nécessité pour les villages de RDC. Next.js 16 (App Router) + Prisma + SQLite.
+nécessité pour les villages de RDC. Next.js 16 (App Router) + Prisma + Supabase Postgres.
 
 ## Stack
 
 - **Next.js 16** (App Router, Turbopack), React 19, TypeScript
-- **Prisma 6** + **SQLite** (fichier `prisma/dev.db`)
+- **Prisma 6** + **Supabase Postgres** (connection pooling PgBouncer)
 - Styling : CSS global unique (`src/app/globals.css`) — charte terre d'origine
   conservée (ocre/olivier/terracotta, Fraunces + Karla via next/font)
 - Pas de Tailwind, pas de framework UI
@@ -24,9 +24,17 @@ nécessité pour les villages de RDC. Next.js 16 (App Router) + Prisma + SQLite.
 
 ```bash
 npm install
-npm run db:setup   # crée dev.db + 4 campagnes d'exemple
+npm run db:setup   # crée les tables sur Supabase + 4 campagnes d'exemple
 npm run dev
 ```
+
+## Variables d'environnement (.env — non commité)
+
+- `DATABASE_URL` — URL Postgres **pooled** (PgBouncer, port 6543,
+  `?pgbouncer=true`) — utilisée par le runtime Prisma Client
+- `DIRECT_URL` — URL Postgres **directe** (port 5432) — utilisée par
+  `prisma migrate dev` (PgBouncer incompatible avec les migrations)
+- `ADMIN_PASSWORD` — mot de passe d'accès admin (régénéré pour la prod)
 
 ## Structure
 
@@ -73,6 +81,9 @@ marqués "(à confirmer)" — à valider avec l'utilisateur avant publication.
 
 ## Notes Prisma
 
-Prisma 7+ exige des driver adapters (config différente). Ce projet utilise
-**Prisma 6.19** (dernière version avec le workflow classique `url` dans le
-schema + `migrate dev`). Ne pas upgrader vers Prisma 7/8 sans migrer la config.
+- **Prisma 7+** exige des driver adapters (config différente). Ce projet utilise
+  **Prisma 6.19** (dernière version avec le workflow classique `url` dans le
+  schema + `migrate dev`). Ne pas upgrader vers Prisma 7/8 sans migrer la config.
+- **Pattern Supabase** : `DATABASE_URL` (pooled, port 6543, PgBouncer) pour le
+  runtime + `DIRECT_URL` (directe, port 5432) pour les migrations. Le bloc
+  `datasource` du schema déclare `directUrl = env("DIRECT_URL")`.
